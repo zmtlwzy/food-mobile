@@ -1,35 +1,41 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 
+// import Home from "@/views/Home.vue";
+// import Category from "@/views/Category.vue";
+// import Maps from "@/views/Maps.vue";
+// import More from "@/views/More.vue";
+
+const Home = () => import( /* webpackChunkName: "Home" */ "../views/Home.vue")
+const Category = () => import( /* webpackChunkName: "Category" */ "../views/Category.vue")
+const Maps = () => import( /* webpackChunkName: "Maps" */ "../views/Maps.vue")
+const More = () => import( /* webpackChunkName: "More" */ "../views/More.vue")
+
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     redirect: "/home",
   },
   {
     path: "/home",
-    component: () => import(/* webpackChunkName: "Home" */ "../views/Home.vue"),
+    component: Home,
   },
   {
     path: "/category",
-    component: () =>
-      import(/* webpackChunkName: "Category" */ "../views/Category.vue"),
+    component: Category,
   },
   {
     path: "/maps",
-    component: () => import(/* webpackChunkName: "Maps" */ "../views/Maps.vue"),
+    component: Maps,
   },
   {
     path: "/more",
-    component: () => import(/* webpackChunkName: "More" */ "../views/More.vue"),
+    component: More,
   },
 ]
 
 const router = new VueRouter({
-  mode: "hash",
-  base: process.env.BASE_URL,
   routes,
 })
 
