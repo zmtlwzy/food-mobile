@@ -19,7 +19,7 @@
       </transition>
     </v-main>
     <BottomNav />
-    <v-snackbar :value="snackbar" color="#ee742f">
+    <v-snackbar :value="snackbar" :color="themeColor">
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
@@ -51,7 +51,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["snackbar", "snackbarText"]),
+    ...mapState(["snackbar", "snackbarText","themeColor"]),
     ...mapGetters(["bottomNavData"]),
   },
 

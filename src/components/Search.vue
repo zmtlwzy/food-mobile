@@ -6,7 +6,7 @@
     hide-details
     clearable
     background-color="grey lighten-4"
-    color="orange darken-3"
+    :color="themeColor"
     dense
     outlined
     flat
@@ -16,17 +16,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
+
 export default {
   data() {
     return {
       loading: false,
     }
   },
+
   props: {
     plhd: {
       type: String,
       default: "",
     },
+  },
+
+  computed: {
+    ...mapState(["themeColor"]),
   },
 }
 </script>

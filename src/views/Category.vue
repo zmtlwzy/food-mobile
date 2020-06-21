@@ -12,7 +12,7 @@
         vertical
         background-color="grey lighten-4"
         active-class="active-tab"
-        color="#ca5c1d"
+        :color="themeColor"
         id="vtab-scroll"
         @change="getCategoryData"
         v-model="tab"
@@ -101,7 +101,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["windowSize"]),
+    ...mapState(["windowSize","themeColor"]),
   },
   watch: {
     windowSize(val) {
@@ -128,7 +128,7 @@ export default {
     },
   },
   created() {
-    this.getCategoryData()
+    // this.getCategoryData()
   },
   methods: {
     ...mapMutations(["onResize"]),

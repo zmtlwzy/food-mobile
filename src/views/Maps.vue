@@ -1,7 +1,7 @@
 <template>
   <div class="Maps">
     <iframe
-      src="/Map.html"
+      :src="src"
       frameborder="0"
       title="ifm"
       :style="{ height: '100vh', width: '100%' }"
@@ -12,5 +12,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed:{
+    src(){
+      return process.env.NODE_ENV === 'development' ? '/Map.html' : 'Map.html'
+    }
+  }
+}
 </script>

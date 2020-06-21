@@ -40,6 +40,7 @@ const firRenderBN = () => {
 
 export default new Vuex.Store({
   state: {
+    themeColor:'#ee742f',
     scrollTop: null,
     lastScrollTop: null,
     lastShowBottomNav: true,
@@ -54,6 +55,9 @@ export default new Vuex.Store({
     snackbarText: '',
   },
   mutations: {
+    changeThemeColor(state,value='#ee742f'){
+      state.themeColor = value
+    },
     setOffsetTop(state, e) {
       state.lastScrollTop = state.scrollTop
       state.scrollTop = e.target.scrollTop

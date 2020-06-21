@@ -1,16 +1,19 @@
 <template>
   <div :class="{ toggle: true, active: active }" @click="change">
-    <span>分类</span>
-    <span>食材</span>
+    <span v-for="(item, index) in toggleText" :key="index">{{ item }}</span>
     <div class="after">
-      <span>分类</span>
-      <span>食材</span>
+      <span
+        v-for="(item, index) in toggleText"
+        :key="index"
+        :style="{ color: themeColor }"
+        >{{ item }}</span
+      >
     </div>
   </div>
 </template>
 
 <script>
-// import { mapMutations } from "vuex"
+import { mapState } from "vuex"
 
 export default {
   model: {
@@ -25,6 +28,9 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  computed: {
+    ...mapState(["themeColor"]),
   },
   methods: {
     // ...mapMutations(["showSnackbar"]),
@@ -47,7 +53,6 @@ $move-L: calc(-50% - #{$width} / 2);
 @mixin span-same {
   position: absolute;
   left: 50%;
-  color: #ee742f;
   transition: $transition;
 }
 

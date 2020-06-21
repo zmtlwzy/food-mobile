@@ -40,8 +40,42 @@ export default {
     }
   },
   computed: {
-    ...mapState(["scrollTop", "lastScrollTop", "lastShowBottomNav"]),
+    ...mapState([
+      "scrollTop",
+      "lastScrollTop",
+      "lastShowBottomNav",
+      "themeColor",
+    ]),
     ...mapGetters(["showBottomNav", "bottomNavData"]),
+  },
+  beforeMount() {
+    if(document.querySelector('#style-bottomNav')) return
+    const style = document.createElement("style")
+    style.setAttribute("type", "text/css")
+    style.setAttribute("id", "style-bottomNav")
+    style.innerHTML = `.BNactive svg {
+         fill:${this.themeColor}
+      }
+      .BNactive span {
+         color:${this.themeColor} !important
+      }`
+    document.head.appendChild(style)
+  },
+  watch: {
+    themeColor(val) {
+      const sheet = document.querySelector("#style-bottomNav").sheet
+      for (let item of sheet.cssRules) {
+        switch (item.selectorText) {
+          case ".BNactive svg":
+            item.style.fill = val
+            break
+          case ".BNactive span":
+            // important等关键字无法通过style.属性值设置，可以通过cssText
+            item.style.cssText = `color:${val} !important`
+            break
+        }
+      }
+    },
   },
   created() {
     this.ifFirRen = false
@@ -78,14 +112,3 @@ export default {
 }
 </script>
 
-<style lang="scss">
-$active_color: #ca5c1d !important;
-.BNactive {
-  svg {
-    fill: $active_color;
-  }
-  span {
-    color: $active_color;
-  }
-}
-</style>
